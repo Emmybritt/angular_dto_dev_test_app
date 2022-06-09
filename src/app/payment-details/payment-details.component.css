@@ -1,0 +1,21 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+
+.content{
+    @apply  flex items-center justify-center py-[8rem] w-full;
+}
+button{
+   @apply text-white font-medium mt-2 shadow-md shadow-blue-300 w-full rounded-md  text-center py-3;
+}
+div label {
+    @apply block text-gray-600 my-1 font-medium capitalize text-blue-600;
+}
+
+div input {
+    @apply w-full border rounded-md py-1 px-4 outline-none focus:ring focus:ring-blue-100 focus:ring-offset-2
+}

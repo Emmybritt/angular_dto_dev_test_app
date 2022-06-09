@@ -5,3 +5,7 @@ export interface CreditCardDetails {
     security_code?:string,
     amount: number,
 }
+
+export interface loadingStateInterface {
+    isSubmitting: boolean
+}

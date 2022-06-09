@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { PaymentService } from './shared/services/payment.service';
 import { addDetailsAction } from './shared/store/payment.action';
+import { isSubmittingSelector } from './shared/store/selector';
 
 @Component({
   selector: 'app-payment-details',
@@ -12,6 +14,7 @@ import { addDetailsAction } from './shared/store/payment.action';
 export class PaymentDetailsComponent implements OnInit {
 
   form: FormGroup | undefined
+  isSubmitting$: Observable<boolean> | undefined
 
     paymentDetailsForm = this.formBuilder.group({
     card_number: ['', Validators.required],
@@ -31,16 +34,23 @@ export class PaymentDetailsComponent implements OnInit {
       this.form = this.paymentDetailsForm;
       
     }
+
+    initializeValues(): void {
+      this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
+
+    }
  
 
   onSubmit(): void {
     console.log('submit', this.form?.value, this.form?.valid);
     this.store.dispatch(addDetailsAction(this.form?.value))
+    this.paymentService.addCreditCardDetails(this.form?.value);
     
   }
 
   ngOnInit(): void {
     this.initializeForm()
+    this.initializeValues()
   }
 
 }
