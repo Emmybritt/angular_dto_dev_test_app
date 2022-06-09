@@ -1,0 +1,23 @@
+<form [formGroup]="paymentDetailsForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="name">Card number</label>
+        <input id="name" type="text" formControlName="card_number">
+    </div>
+    <div>
+        <label for="name">card holder</label>
+        <input id="name" type="text" formControlName="card_holder">
+    </div>
+    <div>
+        <label for="name">expiration date</label>
+        <input id="name" type="text" formControlName="expiration_date">
+    </div>
+    <div>
+        <label for="name">security code</label>
+        <input id="name" type="text" formControlName="security_code">
+    </div>
+    <div>
+        <label for="name">Amount</label>
+        <input id="name" type="text" formControlName="amount">
+    </div>
+    <button type="submit">Submit</button>
+</form>
