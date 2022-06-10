@@ -13,8 +13,8 @@ export class PaymentService {
 
 
   addCreditCardDetails(data: any) {
-    const url = environment.apiUrl;
-    return this.http.post(url, data).pipe(map((response: any) => response.user));
+    // const url = environment.apiUrl;
+    // return this.http.post(url, data).pipe(map((response: any) => response.user));
   }
 
 }
