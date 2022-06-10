@@ -13,16 +13,33 @@ import { isSubmittingSelector } from './shared/store/selector';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  form: FormGroup | undefined
+  form!: FormGroup;
   isSubmitting$: Observable<boolean> | undefined
 
     paymentDetailsForm = this.formBuilder.group({
-    card_number: ['', Validators.required],
-    card_holder: ['', Validators.required],
-    expiration_date: ['', Validators.required],
-    security_code: '',
-    amount: ''
+    card_number: [
+      '', 
+      Validators.required, 
+      Validators.minLength(16), 
+    ],
+    card_holder: [
+      '', 
+      Validators.required
+    ],
+    expiration_date: [
+      '', 
+      Validators.required
+    ],
+    security_code: [
+      '', 
+      
+      Validators.required, 
+      Validators.minLength(3), 
+    ],
+    amount: ['', Validators.required]
   });
+
+  submited = false;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -39,13 +56,35 @@ export class PaymentDetailsComponent implements OnInit {
       this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
 
     }
+
+   get card_number() {
+    return this.paymentDetailsForm.get('card_number');
+   }
+   get card_holder() {
+    return this.paymentDetailsForm.get('card_holder');
+   }
+ 
+   get expiration_date() {
+    return this.paymentDetailsForm.get('expiration_date');
+   }
+   get security_code() {
+    return this.paymentDetailsForm.get('security_code');
+   }
+   get amount() {
+    return this.paymentDetailsForm.get('amount');
+   }
  
 
   onSubmit(): void {
-    console.log('submit', this.form?.value, this.form?.valid);
-    this.store.dispatch(addDetailsAction(this.form?.value))
-    this.paymentService.addCreditCardDetails(this.form?.value);
-    
+    this.submited = true;
+      setTimeout(() => {
+        this.submited = false;
+      }, 3000);
+    if (this.paymentDetailsForm.valid) {
+      console.log('submit', this.form?.value, this.form?.valid);
+      this.store.dispatch(addDetailsAction(this.form?.value))
+      this.paymentService.addCreditCardDetails(this.form?.value);
+    }    
   }
 
   ngOnInit(): void {

@@ -1,34 +1,68 @@
 <div class="bg-gray-100 h-full">
     <div class="content">
-        <div class="bg-white p-6 rounded-md">
+        <div class="bg-white p-6 rounded-m">
             <form [formGroup]="paymentDetailsForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="submited" class="bg-blue-200 rounded text-blue-600 px-6 py-[1rem]">
+                    Your form as been submitted successfully
+                </div>
                     <h1 class="text-2xl  font-bold uppercase mb-4 text-center">Enter your credit details here</h1>
                         <div class="main">
-                            <div *ngIf="paymentDetailsForm.invalid && (paymentDetailsForm.dirty || paymentDetailsForm.touched)" class="bg-red-500 text-white py-2 flex rounded-md px-4">
-                                <div *ngIf="paymentDetailsForm.errors?.['required']">
-                                    All field is required
-                                </div>
-                            </div>
-                            
                             <div>
                                 <label for="card_number">Card number</label>
-                                <input id="card_number"  required minlength="11" type="text" formControlName="card_number">
+                                <input id="card_number"  type="text" required formControlName="card_number">
+                               <div class="bg-red-500 text-sm my-3 text-white py-1 px-3 rounded-sm w-full" *ngIf="card_number?.invalid && (card_number?.dirty || card_number?.touched)">
+                                   <div *ngIf="card_number?.errors?.['required']">
+                                       Card number is required.
+                                   </div>
+                                   <div *ngIf="card_number?.errors?.['minlength']">
+                                       Card number must be 16.
+                                   </div>
+                                   <div *ngIf="card_number?.errors?.['maxlength']">
+                                       Card number must not be greater than 16.
+                                   </div>
+                               </div>
                             </div>
                             <div>
                                 <label for="card_holder">card holder</label>
-                                <input id="card_holder" required type="text" formControlName="card_holder">
+                                <input id="card_holder" type="text" required formControlName="card_holder">
+                                <div class="bg-red-500 text-sm my-3 text-white py-1 px-3 rounded-sm w-full" *ngIf="card_holder?.invalid && (card_holder?.dirty || card_holder?.touched)">
+                                    <div *ngIf="card_holder?.errors?.['required']">
+                                        Card holder is required.
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label for="expiration_date">expiration date</label>
-                                <input id="expiration_date" required type="text" formControlName="expiration_date">
+                                <input id="expiration_date" type="date" required formControlName="expiration_date">
+                                <div class="bg-red-500 text-sm my-3 text-white py-1 px-3 rounded-sm w-full" *ngIf="expiration_date?.invalid && (expiration_date?.dirty || expiration_date?.touched)">
+                                    <div *ngIf="expiration_date?.errors?.['required']">
+                                        expiration date is required.
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <label for="security_code">security code</label>
-                                <input id="security_code" type="text" formControlName="security_code">
+                                <label for="security_code">CVV</label>
+                                <input id="security_code" type="text" required formControlName="security_code">
+                                <div class="bg-red-500 text-sm my-3 text-white py-1 px-3 rounded-sm w-full" *ngIf="security_code?.invalid && (security_code?.dirty || security_code?.touched)">
+                                    <div *ngIf="security_code?.errors?.['required']">
+                                        CVV number is required.
+                                    </div>
+                                    <div *ngIf="security_code?.errors?.['minlength']">
+                                        CVV number must be 3
+                                    </div>
+                                    <div *ngIf="security_code?.errors?.['maxlength']">
+                                        CVV number must not be greater than 3
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label for="amount">Amount</label>
-                                <input id="amount" required type="text" formControlName="amount">
+                                <input id="amount" type="text" required formControlName="amount">
+                                <div class="bg-red-500 text-sm my-3 text-white py-1 px-3 rounded-sm w-full" *ngIf="amount?.invalid && (amount?.dirty || amount?.touched)">
+                                    <div *ngIf="amount?.errors?.['required']">
+                                        You need to specify an amount.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     
