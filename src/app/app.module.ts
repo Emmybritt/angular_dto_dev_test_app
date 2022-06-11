@@ -11,12 +11,14 @@ import { reducers } from './payment-details/shared/store/payment.reducer';
 import { PaymentService } from './payment-details/shared/services/payment.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import {aboutUsComponent} from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaymentDetailsComponent,
     HomeComponent,
+    aboutUsComponent,
   ],
   imports: [
     BrowserModule,

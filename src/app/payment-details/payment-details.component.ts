@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { isSubmittingSelector } from './shared/store/selector';
   templateUrl: './payment-details.component.html',
   styleUrls: ['./payment-details.component.css']
 })
-export class PaymentDetailsComponent implements OnInit {
+export class PaymentDetailsComponent implements OnDestroy {
 
   form!: FormGroup;
   isSubmitting$: Observable<boolean> | undefined
@@ -87,7 +87,7 @@ export class PaymentDetailsComponent implements OnInit {
     }    
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
     this.initializeForm()
     this.initializeValues()
   }
