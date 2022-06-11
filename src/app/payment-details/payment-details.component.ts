@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { isSubmittingSelector } from './shared/store/selector';
   templateUrl: './payment-details.component.html',
   styleUrls: ['./payment-details.component.css']
 })
-export class PaymentDetailsComponent implements OnDestroy {
+export class PaymentDetailsComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   isSubmitting$: Observable<boolean> | undefined
@@ -45,6 +45,9 @@ export class PaymentDetailsComponent implements OnDestroy {
     private formBuilder: FormBuilder, 
     private paymentService: PaymentService,
     private store: Store) { }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
     initializeForm(): void {
       console.log('initializeForm');
@@ -87,7 +90,7 @@ export class PaymentDetailsComponent implements OnDestroy {
     }    
   }
 
-  ngOnDestroy(): void {
+  ngOnInit(): void {
     this.initializeForm()
     this.initializeValues()
   }
